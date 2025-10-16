@@ -1,0 +1,21 @@
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+dist/
+build/
+.env
+
+# Java / Spring
+*.class
+*.jar
+target/
+.gradle/
+out/
+
+# Logs
+*.log
