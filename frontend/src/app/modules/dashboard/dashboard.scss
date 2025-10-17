@@ -1,0 +1,41 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  padding: 0 16px;
+  background-color: #f0f0f0;
+}
+
+.header h1 {
+  flex: 1;
+  text-align: center;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.content {
+  background-color: #ffffff;
+}
+
+.modules-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.module{
+  display: flex;
+  gap: 0.7rem;
+  padding: 0.7rem;
+  align-items: center;
+  font-size: 13px;
+  // font-weight: bold;
+  border-radius: 0.7rem;
+}
