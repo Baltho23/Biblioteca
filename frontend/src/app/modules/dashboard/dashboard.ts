@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
-import { DrawerModule } from 'primeng/drawer';
+import { filter } from 'rxjs';
 
 //PrimeNg
 import { ButtonModule } from 'primeng/button';
-import { filter } from 'rxjs';
+import { DrawerModule } from 'primeng/drawer';
 
 @Component({
   selector: 'app-dashboard',

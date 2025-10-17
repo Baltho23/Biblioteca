@@ -1,0 +1,81 @@
+<p-card>
+  <div class="header-table">
+    <h2>Lista de libros</h2>
+    <button pButton icon="pi pi-plus" aria-label="Agregar" (click)="openAddDialog()"></button>
+  </div>
+
+  <p-table [value]="books" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template #header>
+      <tr>
+        <th>Código</th>
+        <th>Título</th>
+        <th>Género</th>
+        <th>Copias</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-book>
+      <tr>
+        <td>{{ book.id }}</td>
+        <td>{{ book.title }}</td>
+        <td>{{ book.genre }}</td>
+        <td>{{ book.copiesAvailable }}</td>
+        <td>
+          <div class="button-actions">
+            <button pButton icon="pi pi-pencil" (click)="openEditDialog(book)"></button>
+            <button pButton icon="pi pi-trash" severity="danger" (click)="confirmDelete(book)"></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>
+
+<p-dialog
+  [header]="isEditMode ? 'Editar Libro' : 'Agregar Libro'"
+  [modal]="true"
+  [(visible)]="showDialog"
+  [style]="{ width: '22rem' }">
+
+  <form [formGroup]="bookForm" class="inputs-container">
+    <div class="input-box">
+      <label for="title">Título</label>
+      <input pInputText id="title" formControlName="title" />
+      <small *ngIf="bookForm.get('title')?.touched && bookForm.get('title')?.invalid" class="error">
+        El título es obligatorio (mínimo 2 caracteres).
+      </small>
+    </div>
+
+    <div class="input-box">
+      <label for="author">Autor</label>
+      <input pInputText id="author" formControlName="author" />
+      <small *ngIf="bookForm.get('author')?.touched && bookForm.get('author')?.invalid" class="error">
+        El autor es obligatorio.
+      </small>
+    </div>
+
+    <div class="input-box">
+      <label for="genre">Género</label>
+      <input pInputText id="genre" formControlName="genre" />
+      <small *ngIf="bookForm.get('genre')?.touched && bookForm.get('genre')?.invalid" class="error">
+        El género es obligatorio.
+      </small>
+    </div>
+
+    <div class="input-box">
+      <label for="copiesAvailable">Copias</label>
+      <input pInputText id="copiesAvailable" formControlName="copiesAvailable" type="number" />
+      <small *ngIf="bookForm.get('copiesAvailable')?.touched && bookForm.get('copiesAvailable')?.invalid" class="error">
+        Debe haber al menos 1 copia.
+      </small>
+    </div>
+
+    <div class="button-box">
+      <p-button label="Cancelar" severity="secondary" (click)="closeDialog()" />
+      <p-button label="{{ isEditMode ? 'Actualizar' : 'Guardar' }}" (click)="saveBook()" />
+    </div>
+  </form>
+</p-dialog>
+
+<p-confirmDialog></p-confirmDialog>
+<p-toast />
