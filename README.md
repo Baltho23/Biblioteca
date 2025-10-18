@@ -5,6 +5,7 @@ Estructura inicial:
 - frontend/: App (Angular)
   
 Ramas:
+
 -main: Contiene la versión estable del proyecto. 
        Solo se hacen merges desde develop o ramas de hotfix.
 
