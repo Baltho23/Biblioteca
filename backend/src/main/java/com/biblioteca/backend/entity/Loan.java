@@ -37,7 +37,6 @@ public class Loan {
     private LocalDate loanDate;
 
     @NotNull(message = "La fecha de vencimiento es obligatoria")
-    @FutureOrPresent(message = "La fecha de vencimiento no puede ser anterior al préstamo")
     private LocalDate dueDate;
 
     @PastOrPresent(message = "La fecha de devolución no puede ser futura")

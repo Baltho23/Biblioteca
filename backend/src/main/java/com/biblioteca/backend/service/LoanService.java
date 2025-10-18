@@ -65,7 +65,7 @@ public class LoanService {
         Book bookFind = bookRepository.findById(loanUpdateDto.bookId()).orElseThrow(() -> new EntityNotFoundException("Libro no encontrado con id: " + loanUpdateDto.bookId()));
         Member memberFind = memberRepository.findById(loanUpdateDto.memberId()).orElseThrow(() -> new EntityNotFoundException("Miembro no encontrado con id: " + loanUpdateDto.memberId()));
 
-        if (loanUpdateDto.returnDate() != null){
+        if (loanFind.getReturnDate() == null && loanUpdateDto.returnDate() != null){
             bookFind.setCopiesAvailable(bookFind.getCopiesAvailable() + 1);
             bookRepository.save(bookFind);
         }
