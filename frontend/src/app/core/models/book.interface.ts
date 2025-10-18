@@ -12,3 +12,9 @@ export interface BookSaveDto {
   genre: string;
   copiesAvailable: number;
 }
+
+export interface BookStats {
+  bookId: number;
+  title: string;
+  totalLoans: number;
+}
