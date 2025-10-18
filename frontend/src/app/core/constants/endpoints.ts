@@ -23,5 +23,8 @@ export const Endpoints = {
     deleteLoan: (id: number) => `${API_URL}/loans/${id}`,
     getLoans: () => `${API_URL}/loans`,
     postLoans: () => `${API_URL}/loans`,
+  },
+  statistics: {
+    getStatistics: () => `${API_URL}/statistics/books-loans`
   }
 };

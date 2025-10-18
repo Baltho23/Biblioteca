@@ -1,1 +1,13 @@
-<p>statistics works!</p>
+<p-card>
+  <h2>Estadísticas de préstamos</h2>
+
+  <div *ngIf="stats.length">
+    <p>📈 Libro más prestado: <strong>{{ stats[0].title }}</strong> ({{ stats[0].totalLoans }} préstamos)</p>
+    <p>📉 Libro menos prestado: <strong>{{ stats[1].title }}</strong> ({{ stats[1].totalLoans }} préstamos)</p>
+  </div>
+
+  <div *ngIf="!stats.length">
+    No hay datos de préstamos.
+  </div>
+</p-card>
+
