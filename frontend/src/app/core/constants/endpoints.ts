@@ -9,5 +9,12 @@ export const Endpoints = {
     deleteBook: (id: number) => `${API_URL}/books/${id}`,
     getBooks: () => `${API_URL}/books`,
     postBooks: () => `${API_URL}/books`,
+  },
+  member: {
+    getMember: (id: number) => `${API_URL}/members/${id}`,
+    putMember: (id: number) => `${API_URL}/members/${id}`,
+    deleteMember: (id: number) => `${API_URL}/members/${id}`,
+    getMembers: () => `${API_URL}/members`,
+    postMembers: () => `${API_URL}/members`,
   }
 };
