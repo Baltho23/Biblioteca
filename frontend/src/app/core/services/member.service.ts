@@ -14,12 +14,12 @@ export class MemberService {
     return this.http.get<Member[]>(Endpoints.member.getMembers());
   }
 
-  addMember(member: MemberSaveDto): Observable<Member> {
-    return this.http.post<Member>(Endpoints.member.postMembers(), member);
+  addMember(membersave: MemberSaveDto): Observable<Member> {
+    return this.http.post<Member>(Endpoints.member.postMembers(), membersave);
   }
 
-  updateMember(id: number, member: MemberSaveDto): Observable<Member> {
-    return this.http.put<Member>(Endpoints.member.putMember(id), member);
+  updateMember(id: number, memberEdit: MemberSaveDto): Observable<Member> {
+    return this.http.put<Member>(Endpoints.member.putMember(id), memberEdit);
   }
 
   deleteMember(id: number): Observable<Boolean> {

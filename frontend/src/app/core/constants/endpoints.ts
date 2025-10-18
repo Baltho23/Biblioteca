@@ -16,5 +16,12 @@ export const Endpoints = {
     deleteMember: (id: number) => `${API_URL}/members/${id}`,
     getMembers: () => `${API_URL}/members`,
     postMembers: () => `${API_URL}/members`,
+  },
+  loan: {
+    getLoan: (id: number) => `${API_URL}/loans/${id}`,
+    putLoan: (id: number) => `${API_URL}/loans/${id}`,
+    deleteLoan: (id: number) => `${API_URL}/loans/${id}`,
+    getLoans: () => `${API_URL}/loans`,
+    postLoans: () => `${API_URL}/loans`,
   }
 };

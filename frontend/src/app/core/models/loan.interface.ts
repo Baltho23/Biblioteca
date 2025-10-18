@@ -1,16 +1,19 @@
+import { Book } from "./book.interface";
+import { Member } from "./member.interface";
+
 export interface Loan {
   id: number;
-  bookId: string;
-  memberId: string;
-  loanDate: Date;
-  dueDate: Date;
-  returnDate: Date;
+  book: Book;
+  member: Member;
+  loanDate: string;
+  dueDate: string;
+  returnDate: string;
 }
 
 export interface LoanSaveDto {
-  bookId: string;
-  memberId: string;
-  loanDate: Date;
-  dueDate: Date;
-  returnDate: Date;
+  bookId: number;
+  memberId: number;
+  loanDate: string;
+  dueDate: string;
+  returnDate: string;
 }
