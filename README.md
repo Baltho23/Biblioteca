@@ -4,7 +4,4 @@ Estructura inicial:
 - backend/: API (Spring Boot)
 - frontend/: App (Angular)
 
-Ramas:
-- feature/setup: scaffolding inicial
-- feature/books-crud: CRUD de libros
-- feature/loans: gestión de préstamos
+Cada carpeta tiene su archivo explicando como debe de instalarse y ejecutarse. Muchas gracias.
