@@ -1,6 +1,7 @@
 package com.biblioteca.backend.service;
 
 import com.biblioteca.backend.dto.LoanSaveDto;
+import com.biblioteca.backend.dto.LoanUpdateDto;
 import com.biblioteca.backend.entity.Book;
 import com.biblioteca.backend.entity.Loan;
 import com.biblioteca.backend.entity.Member;
@@ -59,16 +60,21 @@ public class LoanService {
         return loanRepository.save(loan);
     }
 
-    public Loan update(Long id, LoanSaveDto loanSaveDto) {
+    public Loan update(Long id, LoanUpdateDto loanUpdateDto) {
         Loan loanFind = loanRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Loan no encontrado con id: " + id));
-        Book bookFind = bookRepository.findById(loanSaveDto.bookId()).orElseThrow(() -> new EntityNotFoundException("Libro no encontrado con id: " + loanSaveDto.bookId()));
-        Member memberFind = memberRepository.findById(loanSaveDto.memberId()).orElseThrow(() -> new EntityNotFoundException("Miembro no encontrado con id: " + loanSaveDto.memberId()));
+        Book bookFind = bookRepository.findById(loanUpdateDto.bookId()).orElseThrow(() -> new EntityNotFoundException("Libro no encontrado con id: " + loanUpdateDto.bookId()));
+        Member memberFind = memberRepository.findById(loanUpdateDto.memberId()).orElseThrow(() -> new EntityNotFoundException("Miembro no encontrado con id: " + loanUpdateDto.memberId()));
+
+        if (loanFind.getReturnDate() == null && loanUpdateDto.returnDate() != null){
+            bookFind.setCopiesAvailable(bookFind.getCopiesAvailable() + 1);
+            bookRepository.save(bookFind);
+        }
 
         loanFind.setBook(bookFind);
         loanFind.setMember(memberFind);
-        loanFind.setLoanDate(loanSaveDto.loanDate());
-        loanFind.setDueDate(loanSaveDto.dueDate());
-        loanFind.setReturnDate(loanSaveDto.returnDate());
+        loanFind.setLoanDate(loanUpdateDto.loanDate());
+        loanFind.setDueDate(loanUpdateDto.dueDate());
+        loanFind.setReturnDate(loanUpdateDto.returnDate());
 
         return loanRepository.save(loanFind);
     }

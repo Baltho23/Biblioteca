@@ -1,6 +1,7 @@
 package com.biblioteca.backend.controller;
 
 import com.biblioteca.backend.dto.LoanSaveDto;
+import com.biblioteca.backend.dto.LoanUpdateDto;
 import com.biblioteca.backend.entity.Loan;
 import com.biblioteca.backend.service.LoanService;
 import jakarta.validation.Valid;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/loans")
 public class LoanController {
@@ -40,8 +43,8 @@ public class LoanController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Loan> update(@PathVariable Long id, @Valid @RequestBody LoanSaveDto loanSaveDto) {
-        return  ResponseEntity.ok(loanService.update(id, loanSaveDto));
+    public ResponseEntity<Loan> update(@PathVariable Long id, @Valid @RequestBody LoanUpdateDto loanUpdateDto) {
+        return  ResponseEntity.ok(loanService.update(id, loanUpdateDto));
     }
 
     @DeleteMapping("/{id}")

@@ -1,0 +1,103 @@
+<p-card>
+  <div class="header-table">
+    <h2>Lista de préstamos</h2>
+    <button pButton icon="pi pi-plus" aria-label="Agregar" (click)="openAddDialog()"></button>
+  </div>
+
+  <p-table [value]="loans" [tableStyle]="{ 'min-width': '60rem' }">
+    <ng-template #header>
+      <tr>
+        <th>Codigo</th>
+        <th>ID Libro</th>
+        <th>ID Miembro</th>
+        <th>Fecha Préstamo</th>
+        <th>Fecha Vencimiento</th>
+        <th>Fecha Devolución</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+
+    <ng-template #body let-loan>
+      <tr>
+        <td>{{ loan.id }}</td>
+        <td>{{ loan.book.id }}</td>
+        <td>{{ loan.member.id }}</td>
+        <td>{{ loan.loanDate }}</td>
+        <td>{{ loan.dueDate }}</td>
+        <td>{{ loan.returnDate || '-' }}</td>
+        <td>
+          <div class="button-actions">
+            <button pButton icon="pi pi-pencil" (click)="openEditDialog(loan)"></button>
+            <button pButton icon="pi pi-trash" severity="danger" (click)="confirmDelete(loan)"></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>
+
+<p-dialog
+  [header]="isEditMode ? 'Editar Préstamo' : 'Agregar Préstamo'"
+  [modal]="true"
+  [(visible)]="showDialog"
+  [style]="{ width: '25rem' }">
+
+  <form [formGroup]="loanForm" class="inputs-container">
+
+    <div class="input-box">
+      <label for="bookId">ID Libro</label>
+      <input pInputText id="bookId" formControlName="bookId" type="number" />
+      <small *ngIf="loanForm.get('bookId')?.touched && loanForm.get('bookId')?.invalid" class="error">
+        El ID del libro es obligatorio.
+      </small>
+    </div>
+
+    <div class="input-box">
+      <label for="memberId">ID Miembro</label>
+      <input pInputText id="memberId" formControlName="memberId" type="number" />
+      <small *ngIf="loanForm.get('memberId')?.touched && loanForm.get('memberId')?.invalid" class="error">
+        El ID del miembro es obligatorio.
+      </small>
+    </div>
+
+    <div class="input-box">
+      <label for="loanDate">Fecha Préstamo</label>
+      <input pInputText id="loanDate" formControlName="loanDate" type="date" />
+      <small *ngIf="loanForm.get('loanDate')?.touched && loanForm.get('loanDate')?.hasError('required')" class="error">
+        La fecha de préstamo es obligatoria.
+      </small>
+      <small *ngIf="loanForm.get('loanDate')?.hasError('futureDate')" class="error">
+        La fecha de préstamo no puede ser futura.
+      </small>
+    </div>
+
+    <div class="input-box">
+      <label for="dueDate">Fecha Vencimiento</label>
+      <input pInputText id="dueDate" formControlName="dueDate" type="date" />
+      <small *ngIf="loanForm.get('dueDate')?.touched && loanForm.get('dueDate')?.hasError('required')" class="error">
+        La fecha de vencimiento es obligatoria.
+      </small>
+      <small *ngIf="loanForm.get('dueDate')?.hasError('dueBeforeLoan')" class="error">
+        La fecha de vencimiento no puede ser anterior al préstamo.
+      </small>
+    </div>
+
+    <div class="input-box">
+      <label for="returnDate">Fecha Devolución</label>
+      <input pInputText id="returnDate" formControlName="returnDate" type="date" />
+      <small *ngIf="loanForm.get('returnDate')?.hasError('futureDate')" class="error">
+        La fecha de devolución no puede ser futura.
+      </small>
+    </div>
+
+    <div class="button-box">
+      <p-button label="Cancelar" severity="secondary" (click)="closeDialog()" />
+      <p-button label="{{ isEditMode ? 'Actualizar' : 'Guardar' }}" (click)="saveLoan()" />
+    </div>
+
+  </form>
+</p-dialog>
+
+<p-confirmDialog></p-confirmDialog>
+<p-toast />
+
