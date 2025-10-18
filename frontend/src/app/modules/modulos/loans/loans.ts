@@ -61,6 +61,7 @@ export class Loans implements OnInit {
   openAddDialog(): void {
     this.isEditMode = false;
     this.loanForm.reset();
+    this.loanForm.get('returnDate')?.disable();
     this.showDialog = true;
   }
 
@@ -74,6 +75,7 @@ export class Loans implements OnInit {
       dueDate: loan.dueDate,
       returnDate: loan.returnDate,
     });
+    this.loanForm.get('returnDate')?.enable();
     this.showDialog = true;
   }
 
@@ -92,6 +94,7 @@ export class Loans implements OnInit {
           this.loadLoans();
           this.closeDialog();
         },
+        error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Actualizacion invalida' }),
       });
     } else {
       this.loanService.addLoan(loanData).subscribe({
@@ -100,6 +103,7 @@ export class Loans implements OnInit {
           this.loadLoans();
           this.closeDialog();
         },
+        error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Prestamo invalido' }),
       });
     }
   }

@@ -32,3 +32,32 @@
   display: flex;
   gap: 5px;
 }
+
+.input-box input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-box input:focus {
+  border-color: #007ad9;
+  box-shadow: 0 0 5px rgba(0, 122, 217, 0.5);
+  outline: none;
+}
+
+.input-box label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.input-box .error {
+  color: #d9534f;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  display: block;
+}
